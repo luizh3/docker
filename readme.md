@@ -69,15 +69,24 @@ Configurada atraves do arquivo Dockerfile
 * Uma forma prática de persistir dados em aplicações e nao depender de containers para isso
 * Todo dado criado por um container e salvo nele, quando o container é removido, perdemos os dados
 * Precisamos dos volumes para gerenciar os dados e fazer backups de forma mais simples.
+* Os dados salvos em volumes persistem as remoções de containers
  
     #### Tipos
  
     - `Anonymous`: diretórios criados pela flag -v, com um nome aleatório
     - `Nomeados`: São volumes nomeados
-    - `Bind mounts`: Uma forma de salvar dados na nossa máquina, sem  o gerenciamento do docker, informamos um diretório para isso.
+    - `Bind mounts`: Uma forma de salvar dados na nossa máquina, sem  o gerenciamento do docker, informamos um diretor para isso. Ele também serve para atualizar a aplicação em tempo real também.
  
     #### Comandos:
         docker run -v /data : Escolher uma pasta para salvar os volumes ( volume anônimo )
         docker volume ls : Ver todos os volumes do ambiente
- 
+        docker run -v [Nome do volume]:/data : Criar volume nomeado, o diretório tem que ser igual ao workdir
+        docker run -v /dir/data:/data : bind mounts, salvas os dados na máquina host
+        docker volume create [Nome] : Criar um volume com nome
+        docker volume inspect [Nome] : Verificar detalhes do volume
+        docker volume rm [Nome] : Remover um volume, todos os dados serão removidos
+        docker volume prune : Remover todos os volumes que nao estao sendo utilizados
+        docker run -v volume:/data:ro : Volume de apenas leitura, RO e a abreviação de read only
+
+
 
