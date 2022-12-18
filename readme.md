@@ -88,5 +88,36 @@ Configurada atraves do arquivo Dockerfile
         docker volume prune : Remover todos os volumes que nao estao sendo utilizados
         docker run -v volume:/data:ro : Volume de apenas leitura, RO e a abreviação de read only
 
+## Networks 
 
+* Uma forma de gerenciar a conexão do Docker com outras plataformas ou até mesmo entre containers
+* As redes ou networks são criadas separadas do containers, como os volumes
+* Existem alguns drivers de redes
+* Deixa fácil a comunicação entre containers
+ 
+    #### Tipos de conexão
+ 
+    - `Externa`: Conexão com Api de um servidor remoto
+    - `Com Host`: Comunicação com a maquina que está executando o Docker
+    - `Entre containers`: Utiliza um driver bridge, permite a comunicação entre dois ou mais containers
 
+    #### Tipos de rede ( Drivers )
+
+    - `Bridge`: o mais comum é default do docker, utilizado quando containers precisam se conectar
+    - `Host`: permite a conexão entre um container e a maquina que esta hosteando o Docker
+    - `Macvlan`: permite a conexao a um container por um MAC address
+    - `None`: remove todas as conexões de rede de um container
+    - `Plugins`: Permite extensões de terceiros para criar outras redes
+    
+
+    #### Comandos 
+ 
+        docker network ls : listar as redes existentes
+        docker network create [nome] : criar uma rede, essa rede seta do tipo bridge
+        docker network create -d [Nome driver] [Nome rede] : criar uma rede com um driver específico
+        docker network rm [nome] : remover uma rede existente
+        docker network prune : Remover todas as redes que não estão sendo utilizadas
+        docker run --network [Nome network] : Conectar container a network
+        docker network connect [Nome network] [Nome container] : Conectar um container a uma network
+        docker network disconnect [Nome network] [Nome container] : Desconectar um container de uma network
+        docker network inspect [Nome network] : Exibe detalhes de uma rede
