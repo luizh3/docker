@@ -121,3 +121,14 @@ Configurada atraves do arquivo Dockerfile
         docker network connect [Nome network] [Nome container] : Conectar um container a uma network
         docker network disconnect [Nome network] [Nome container] : Desconectar um container de uma network
         docker network inspect [Nome network] : Exibe detalhes de uma rede
+
+
+## YAML 
+
+* E uma linguagem de serialização utilizada para criar composes 
+* Utilizada geralmente para arquivos de configuração 
+* Extensão do arquivo pode ser yml ou yaml
+* O fim de uma linha indica o fim da instrucao, nao ha ponto e virgula 
+* A indentacao deve conter um ou mais espacos, e nao devemos utilizar tab
+* O espaco e obrigatorio apos a declaracao da chave 
+* Para criar um comentario e utilizado o simbolo #

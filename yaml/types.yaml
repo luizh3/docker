@@ -1,0 +1,49 @@
+nome: "Luiz"
+idade: 19
+
+# Objeto em yaml
+objeto:
+ versao: 5
+ arquivo: "test.txt"
+
+# Tipo integer
+versao: 2
+
+# Tipo float
+versao_completa: 3.14
+
+# Tipo string com aspas
+string_sem_aspas: Ola mundo
+
+# Tipo string sem aspas 
+string_com_aspas: "Ola mundo"
+
+# Valor nulo, fica como none
+nulo: ~
+
+# Valor nulo, fica como none
+nulo_null: null
+
+# Boolean, valores possiveis On/Off ou True/False
+boolean_value: On
+
+# Arrays/Listas
+
+lista: [ 1, 2, 3, 4, 5 ]
+
+lista_items:
+  - "test"
+  - 10
+  - True
+  - Valor
+
+# Objetos/Dicionários
+
+obj: { a: 1, b: 2, c: 3, objeto_interno: { x: 10 }  }
+
+obj_items:
+  a: 1
+  b: 2
+  objeto_interno:
+    x: 10
+
