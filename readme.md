@@ -125,10 +125,23 @@ Configurada atraves do arquivo Dockerfile
 
 ## YAML 
 
-* E uma linguagem de serialização utilizada para criar composes 
-* Utilizada geralmente para arquivos de configuração 
+* E uma linguagem de serialização utilizada para criar composes
+* Utilizada geralmente para arquivos de configuração
 * Extensão do arquivo pode ser yml ou yaml
-* O fim de uma linha indica o fim da instrucao, nao ha ponto e virgula 
-* A indentacao deve conter um ou mais espacos, e nao devemos utilizar tab
-* O espaco e obrigatorio apos a declaracao da chave 
-* Para criar um comentario e utilizado o simbolo #
+* O fim de uma linha indica o fim da instrucao, nao ha ponto e vírgula
+* A indentação deve conter um ou mais espaços, e nao devemos utilizar tab
+* O espaço e obrigatório após a declaração da chave
+* Para criar um comentario e utilizado o símbolo #
+
+## COMPOSE
+
+* É uma ferramenta para rodar múltiplos containers
+* Teremos uma arquivo de configuração que vai comandar os containers
+* É uma forma de rodar múltiplos build e runs com um comando
+ 
+- `version`: Versão do compose
+- `services`: Containers/serviços que vão rodar nessa aplicação
+- `Volumes`: Possível adição de volumes
+
+    ### Comandos
+        docker compose up : Executar o compose
