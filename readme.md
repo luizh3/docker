@@ -145,3 +145,12 @@ Configurada atraves do arquivo Dockerfile
 
     ### Comandos
         docker compose up : Executar o compose
+        docker compose up -d : Rodar em detached 
+        docker compose down : Parar o compose 
+    
+    ### Variaveis de ambiente 
+
+        * Para isso vamos definir um arquivo base em env_file
+        * As variáveis podem ser chamadas pela sintaxe: ${VARIAVEL}
+        * Esta técnica é útil para armazenar dados sensíveis
+
