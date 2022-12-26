@@ -109,7 +109,6 @@ Configurada atraves do arquivo Dockerfile
     - `None`: remove todas as conexões de rede de um container
     - `Plugins`: Permite extensões de terceiros para criar outras redes
     
-
     #### Comandos 
  
         docker network ls : listar as redes existentes
@@ -121,7 +120,6 @@ Configurada atraves do arquivo Dockerfile
         docker network connect [Nome network] [Nome container] : Conectar um container a uma network
         docker network disconnect [Nome network] [Nome container] : Desconectar um container de uma network
         docker network inspect [Nome network] : Exibe detalhes de uma rede
-
 
 ## YAML 
 
@@ -147,6 +145,7 @@ Configurada atraves do arquivo Dockerfile
         docker compose up : Executar o compose
         docker compose up -d : Rodar em detached 
         docker compose down : Parar o compose 
+        docker compose ps : Ver os serviços do compose que estao rodando 
     
     ### Variaveis de ambiente 
 
@@ -154,3 +153,27 @@ Configurada atraves do arquivo Dockerfile
         * As variáveis podem ser chamadas pela sintaxe: ${VARIAVEL}
         * Esta técnica é útil para armazenar dados sensíveis
 
+## Docker Swarm
+
+    * É uma ferramenta para trabalhar com orquestração de containers
+    * Temos um serviço que monitor os outros serviços
+    * Podemos escalar os serviço para mais de uma máquina, dividindo o custo de processamento
+    * Podemos escalar horizontalmente nossos projetos de maneira simples
+    * O famoso Cluster ( Colocar várias máquinas em paralelo, criando novas instâncias sincronizadas com o mesmo projeto )
+    * Os comandos são semelhantes ao Docker
+
+### Conceitos
+    
+- `Nodes`: E uma instância ( Máquina ) que participa do swarm
+- `Manager Node`: Node que gerencia os demais Nodes
+- `Worker Node`: Nodes que trabalham em função do manager
+- `Service`: Tasks que o Manager Node manda o Work Node executar
+- `Task`:  Comandos que são executados nos Nodes
+
+    ### Comandos
+
+        docker swarm init --advertise-addr [IP] : Inciando o swarm indicando o ip de qual maquina esta gerenciando o docker
+            Obs: Nesse caso vai ser criado um node, e essa maquina vai virar um Manager Node
+        docker swarm leav -f : Sai do swarm
+        docker swarm join --token [Token] [IP]:[PORTA] : Entrar no swarm
+        docker node ls : Verificar os nodes que estão ativos, vai ser listado quais maquinas o swarm esta utilizando para fazer o cluster
