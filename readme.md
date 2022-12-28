@@ -161,7 +161,8 @@ Configurada atraves do arquivo Dockerfile
     * Podemos escalar horizontalmente nossos projetos de maneira simples
     * O famoso Cluster ( Colocar várias máquinas em paralelo, criando novas instâncias sincronizadas com o mesmo projeto )
     * Os comandos são semelhantes ao Docker
-
+    * Garantir que os serviços estejam sempre disponíveis, se o container do worker for parado, ele reiniciará automaticamente
+ 
 ### Conceitos
     
 - `Nodes`: E uma instância ( Máquina ) que participa do swarm
@@ -172,8 +173,24 @@ Configurada atraves do arquivo Dockerfile
 
     ### Comandos
 
-        docker swarm init --advertise-addr [IP] : Inciando o swarm indicando o ip de qual maquina esta gerenciando o docker
-            Obs: Nesse caso vai ser criado um node, e essa maquina vai virar um Manager Node
-        docker swarm leav -f : Sai do swarm
-        docker swarm join --token [Token] [IP]:[PORTA] : Entrar no swarm
-        docker node ls : Verificar os nodes que estão ativos, vai ser listado quais maquinas o swarm esta utilizando para fazer o cluster
+        docker swarm init --advertise-addr [IP] : Iniciando o swarm indicando o ip de qual máquina está gerenciando o docker
+            Obs: Nesse caso vai ser criado um node, e essa máquina vai virar um Manager Node
+        docker swarm leav -f : Sai do swarm, o -f e necessário se apenas houver um node no swarm
+        docker swarm join --token [TOKEN] [IP]:[PORTA] : Entrar no swarm
+        docker node ls : Verificar os nodes que estão ativos, vai ser listado quais máquinas o swarm está utilizando para fazer o cluster
+        docker service create --name [NOME] -p [PORTA] [Imagem]  : Dessa forma o container será adicionado ao manager
+        docker service ls : Listar serviços que estão rodando
+        docker service ps [ID]: Containers do serviço, incluindo os workers
+        docker service rm [NOME/ID] : Remover servico
+        docker service create --name [NOME] --replicas [Número] [Imagem] : Cria serviço que será replicado nos workers
+        docker swarm join-token manager : Pegar o token do manager
+        docker node rm [ID] : A instância não será mais considerada um node, caso exista algum serviço rodando, é necessário o -f
+        docker service inspect [ID] : Inspecionar o serviço
+        docker stack deploy -c [ARQUIVO.YML] [NOME] : Executar arquivo do compose
+        docker service scale [NOME]=[RÉPLICAS] : Escalar o serviço para os demais workers
+        docker node update --availability drain [ID] : Alterando o status do node para drain, parar de receber ordens do manager, o status ativo e o active
+        docker service update --image [IMAGEM] [SERVICO] : Atualizando a imagem dos nodes
+        docker network create --driver [DRIVER] [NOME] : Criar network
+            Obs: o driver utilizado é o overlay
+        docker service update --network-add [NETWORK] [SERVIÇO] : Conectar um serviço a uma network
+ 
