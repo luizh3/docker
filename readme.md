@@ -38,7 +38,7 @@ Configurada atraves do arquivo Dockerfile
         docker build -t [nome]:[tag] : Criar o container com nome e tag
         docker start -it <id/nome> : Rodar o container de forma interativo
         docker rmi -f [Imagem] : Remover imagem, -f para forçar
-        docker system prune : Remover imagens/containers/networks que nao estao sendo utilizadas
+        docker system prune : Remover imagens/containers/networks que não estao sendo utilizadas
         docker login : Logar na conta do docker, para envio de imagens por exemplo
         docker logout : Deslogar
         docker push [Imagem] : Mandar a image para o docker-hub
@@ -66,7 +66,7 @@ Configurada atraves do arquivo Dockerfile
  
 ## Volume
  
-* Uma forma prática de persistir dados em aplicações e nao depender de containers para isso
+* Uma forma prática de persistir dados em aplicações e não depender de containers para isso
 * Todo dado criado por um container e salvo nele, quando o container é removido, perdemos os dados
 * Precisamos dos volumes para gerenciar os dados e fazer backups de forma mais simples.
 * Os dados salvos em volumes persistem as remoções de containers
@@ -85,7 +85,7 @@ Configurada atraves do arquivo Dockerfile
         docker volume create [Nome] : Criar um volume com nome
         docker volume inspect [Nome] : Verificar detalhes do volume
         docker volume rm [Nome] : Remover um volume, todos os dados serão removidos
-        docker volume prune : Remover todos os volumes que nao estao sendo utilizados
+        docker volume prune : Remover todos os volumes que não estao sendo utilizados
         docker run -v volume:/data:ro : Volume de apenas leitura, RO e a abreviação de read only
 
 ## Networks 
@@ -126,8 +126,8 @@ Configurada atraves do arquivo Dockerfile
 * E uma linguagem de serialização utilizada para criar composes
 * Utilizada geralmente para arquivos de configuração
 * Extensão do arquivo pode ser yml ou yaml
-* O fim de uma linha indica o fim da instrucao, nao ha ponto e vírgula
-* A indentação deve conter um ou mais espaços, e nao devemos utilizar tab
+* O fim de uma linha indica o fim da instrucao, não ha ponto e vírgula
+* A indentação deve conter um ou mais espaços, e não devemos utilizar tab
 * O espaço e obrigatório após a declaração da chave
 * Para criar um comentario e utilizado o símbolo #
 
@@ -194,3 +194,38 @@ Configurada atraves do arquivo Dockerfile
             Obs: o driver utilizado é o overlay
         docker service update --network-add [NETWORK] [SERVIÇO] : Conectar um serviço a uma network
  
+## Kubernetes
+   
+    * É uma ferramenta para trabalhar com orquestração de containers
+    * Permite a criação de múltiplos contêineres em diferentes máquinas( nodes )
+    * Escala projetos, formando um cluster
+ 
+### Conceitos
+   
+- `Control Plane`: Onde é gerenciado o controle dos processos dos Nodes
+- `Nodes`: Máquinas que são gerenciadas pelo Control Plane
+- `Deployment`: A execução de uma imagem/projeto em um Pod
+- `Pod`: Um ou mais containers que estão em um node
+- `Services`:  Serviços que expõe os Pods ao mundo externo
+- `Kubectl`:  Cliente de linha de comando para Kubernetes
+ 
+### Dependências 
+
+- `Kubectl`: A maneira de executar o Kubernetes
+- `Minikube`: Uma espécie de simulador de Kubernetes, assim não vamos precisar de vários computadores
+ 
+   ### Comandos:
+        kubectl create deployment [NOME] --imagem=[IMAGEM] : Fazer o deployment, rodar os containers das aplicações nos Pods 
+        kubectl get deployments : Visualizar os deployments
+        kubectl describe deployments : Receber mais detalhes
+        kubectl get pods : Verificar os Pods
+        kubectl describe pods : Detalhes dos Pods 
+
+### Minikube
+
+   ### Comandos:
+        minikube start --driver=[DRIVER] : Inicializar o minikube, drivers possiveis: virtualbox, hyperv, docker 
+        minikube status : Verificar status
+        minikube stop : Parar o minikube
+        minikube dashboard : Ver detalhes do nosso projeto
+
