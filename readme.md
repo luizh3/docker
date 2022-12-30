@@ -48,7 +48,8 @@ Configurada atraves do arquivo Dockerfile
 ## Containers
  
     Comandos:
- 
+        docker kill $( docker ps -q ) : Parar todos os containers
+        docker rm $(docker ps -a -q) : Remover todos os containers
         docker run -it [Imagem] : Roda a imagem e disponibiliza um terminal para acesso.
         docker ps -a : Mostra os containers que já rodaram.
         docker run -d [Imagem]: Roda o container em background  
@@ -215,17 +216,42 @@ Configurada atraves do arquivo Dockerfile
 - `Minikube`: Uma espécie de simulador de Kubernetes, assim não vamos precisar de vários computadores
  
    ### Comandos:
-        kubectl create deployment [NOME] --imagem=[IMAGEM] : Fazer o deployment, rodar os containers das aplicações nos Pods 
+        kubectl create deployment [NOME] --imagem=[IMAGEM] : Fazer o deployment, rodar os containers das aplicações nos Pods
         kubectl get deployments : Visualizar os deployments
         kubectl describe deployments : Receber mais detalhes
         kubectl get pods : Verificar os Pods
-        kubectl describe pods : Detalhes dos Pods 
-
+        kubectl describe pods : Detalhes dos Pods
+        kubectl expose deployment [NOME] --type=[TIPO] --port=[PORTA] : Expor nossos serviços, o tipo mais utilizado e LoadBalancer ( Todos os pods são expostos )
+        kubectl get services : Ver os serviços já criados
+        kubectl describe services/[NOME] : Ver detalhes
+        kubectl scale deployment/[NOME] --replicas=[NUMERO] : Replicando a aplicao em outros pods, para diminuir o número de réplicas basta executar o mesmo comando passando uma quantidade menor
+        kubectl get rs: Checar as réplicas
+        kubectl set image deployment/[NOME] [NOME_CONTAINER]=[NOVA_IMAGEM] : Atualizar imagem do container
+        kubectl rollout status deployment/[NOME] : Verificar uma alteracao
+        kubectl rollout undo deployment/[NOME] : Voltar uma alteração
+        kubectl delete service [NOME] : Deletar um serviço, dessa maneira nossos pods vão perder a conexão externa
+        kubectl delete deployment [NOME] : Deletar o deployment
+        kubectl apply -f [ARQUIVO] : Executar arquivo Deployment
+        kubectl delete -f [ARQUIVO] : Parar deployment
+ 
+   ### Modo Declarativo
+ 
+   Chaves mais utilizadas
+ 
+   - `apiVersion`: Versão utilizada da ferramenta
+   - `kind`: Tipo do arquivo ( Deployment, Service )
+   - `metadata`: Descrever algum objeto, inserindo chaves como name
+   - `replicas`: Numero de replicas de Nodes/Pods
+   - `containers`: Definir as especificações de containers como, nome e imagem
+ 
 ### Minikube
-
+ 
    ### Comandos:
-        minikube start --driver=[DRIVER] : Inicializar o minikube, drivers possiveis: virtualbox, hyperv, docker 
+        minikube start --driver=[DRIVER] : Inicializar o minikube, drivers possiveis: virtualbox, hyperv, docker
         minikube status : Verificar status
         minikube stop : Parar o minikube
         minikube dashboard : Ver detalhes do nosso projeto
+        minikube service [NOME] : Acessar o serviço que criamos
+ 
+ 
 

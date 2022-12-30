@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  selector: # Seleciona, link entre o flask.yaml e flask-service, vai expor o container...
+    app: flask-app
+  ports:
+    - protocol: 'TCP'
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
+
+--- # Separador do arquivo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+spec: # Definicao geral do deployment
+  replicas: 4
+  selector: 
+    matchLabels:
+      app: flask-app
+  template: # Como esse aplicativo/template vai rodar
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+        - name: flask
+          image: luizhs3/flask-kube-projeto:2
